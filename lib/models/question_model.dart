@@ -10,6 +10,12 @@ class QuestionModel {
     required this.options,
     required this.answerIndex,
   });
+
+  // List<String> getShuffleOptions() {
+  //   final shuffleList = List.of(options);
+  //   shuffleList.shuffle();
+  //   return shuffleList;
+  // }
 }
 
 // Sample quiz data using the QuestionModel

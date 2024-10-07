@@ -8,20 +8,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-                colors: [
-                  Color(0xff071952),
-                  Color(0xff0B666A),
-                ],
-              ),
-            ),
-          ),
+          // Background
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
             child: Column(
@@ -59,22 +46,12 @@ class WelcomeScreen extends StatelessWidget {
                 const Spacer(),
 
                 // Let's Start Quiz Button
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(double.infinity, 56),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50),
-                    ),
-                  ),
-                  child: Text(
-                    "Get Started",
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xff071952),
-                        ),
-                  ),
-                ),
+                // const OptionButtonWidget(
+                //   text: 'GetStarted',
+                //   textColor: Color(0xff071952),
+                //   fontWeight: FontWeight.bold,
+                //   backgroundColor: Color(0xff35A29F),
+                // ),
                 const SizedBox(height: 32.0)
               ],
             ),

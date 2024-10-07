@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:quiz_app_flutter/screens/welcome_screen.dart';
+import 'package:quiz_app_flutter/ui/screens/questions_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,12 +19,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        useMaterial3: false,
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color(0xff97FEED), brightness: Brightness.dark),
         fontFamily: 'Poppins',
+        useMaterial3: false,
+        brightness: Brightness.light,
       ),
-      home: const WelcomeScreen(),
+      home: const QuestionsScreen(),
     );
   }
 }
