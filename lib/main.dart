@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:quiz_app_flutter/ui/screens/questions_screen.dart';
+import 'package:quiz_app_flutter/ui/screens/welcome_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: false,
         brightness: Brightness.light,
       ),
-      home: const QuestionsScreen(),
+      home: const WelcomeScreen(),
     );
   }
 }

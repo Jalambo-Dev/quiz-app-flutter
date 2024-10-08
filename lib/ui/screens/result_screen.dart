@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_app_flutter/ui/screens/questions_screen.dart';
+import 'package:quiz_app_flutter/ui/screens/welcome_screen.dart';
 import 'package:quiz_app_flutter/ui/widgets/next_button_widget.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -30,7 +31,7 @@ class ResultScreen extends StatelessWidget {
               onPressed: () => Navigator.pushReplacement(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => const QuestionsScreen(),
+                    builder: (context) => const WelcomeScreen(),
                   )),
               child: const Icon(CupertinoIcons.arrow_clockwise),
             )
