@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz_app_flutter/ui/screens/questions_screen.dart';
 import 'package:quiz_app_flutter/ui/screens/welcome_screen.dart';
-import 'package:quiz_app_flutter/ui/widgets/next_button_widget.dart';
 
 class ResultScreen extends StatelessWidget {
   final int score;
