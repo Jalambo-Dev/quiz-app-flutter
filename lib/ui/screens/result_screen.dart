@@ -13,11 +13,16 @@ class ResultScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Score
             Text('Score', style: Theme.of(context).textTheme.displaySmall),
+
+            // Value of Score
             Text(
               "${score.toString()}/10",
               style: Theme.of(context).textTheme.displaySmall,
             ),
+
+            // Try Again Button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size(64, 64),

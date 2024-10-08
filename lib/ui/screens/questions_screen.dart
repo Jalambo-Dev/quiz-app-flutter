@@ -25,6 +25,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
 
   late double _percentage = 0.0;
 
+  // Go to new question
   void nextQuestion() {
     setState(() {
       if (_currentIndex == 9) {
