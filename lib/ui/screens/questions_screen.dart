@@ -100,7 +100,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                   children: [
                     // Index of question
                     Text(
-                      'Question ${_currentQuestion.id}/10',
+                      'Question ${_currentQuestion.id}',
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium
@@ -127,67 +127,11 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
                     const SizedBox(height: 18),
 
                     ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _currentQuestion.options.length,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        // Check if this option is selected
-                        bool isSelected = selectedIndex == index;
-                        // Check if this is the correct option
-                        bool isCorrectOption =
-                            index == _currentQuestion.answerIndex;
-
-                        return OptionButtonWidget(
-                          text: _currentQuestion.options[index],
-                          backgroundColor: isAnswered
-                              ? (isSelected
-                                  ? (isCorrect
-                                      ? Colors.green.shade400
-                                      : Colors.red.shade400)
-                                  : isCorrectOption
-                                      ? Colors.green.shade400
-                                      : Colors.black45)
-                              : Colors.black45,
-                          onTap: !isAnswered // Allow taps only if not answered
-                              ? () {
-                                  setState(() {
-                                    selectedIndex =
-                                        index; // Update selected index
-                                    isAnswered =
-                                        true; // Mark the question as answered
-                                    isCorrect =
-                                        isCorrectOption; // Check if selected option is correct
-                                    if (isCorrect) {
-                                      log("Correct Answer");
-                                      score++;
-                                    } else {
-                                      log("Incorrect Answer");
-                                    }
-                                  });
-                                }
-                              : null, // Disable onTap if already answered
-                          visible: true, // Ensure icon is visible
-                          iconData: isAnswered
-                              ? (isSelected
-                                  ? (isCorrect
-                                      ? Icons.check_circle
-                                      : Icons.cancel)
-                                  : (isCorrectOption
-                                      ? Icons.check_circle
-                                      : Icons.circle))
-                              : Icons.circle_outlined,
-                          iconDataColor: isAnswered
-                              ? (isSelected
-                                  ? (isCorrect
-                                      ? Colors.green.shade900
-                                      : Colors.red.shade900)
-                                  : (isCorrectOption
-                                      ? Colors.green.shade900
-                                      : Colors.transparent))
-                              : Colors.transparent,
-                        );
-                      },
-                    ),
+                        shrinkWrap: true,
+                        itemCount: _currentQuestion.options.length,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) =>
+                            _buildOptionButton(index)),
                   ],
                 ),
               ),
@@ -209,5 +153,69 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         ),
       ),
     );
+  }
+
+  Widget _buildOptionButton(int index) {
+    // Check if this option is selected
+    bool isSelected = selectedIndex == index;
+    // Check if this is the correct option
+    bool isCorrectOption = index == _currentQuestion.answerIndex;
+
+    return OptionButtonWidget(
+      text: _currentQuestion.options[index],
+      backgroundColor: _getBackgroundColor(isSelected, isCorrectOption),
+      onTap:
+          !isAnswered ? () => _handleOptionTap(index, isCorrectOption) : null,
+      visible: true, // Ensure icon is visible
+      iconData: _getIconData(isSelected, isCorrectOption),
+      iconDataColor: _getIconDataColor(isSelected, isCorrectOption),
+    );
+  }
+
+  Color _getBackgroundColor(bool isSelected, bool isCorrectOption) {
+    if (isAnswered) {
+      if (isSelected) {
+        return isCorrect ? Colors.green.shade400 : Colors.red.shade400;
+      } else {
+        return isCorrectOption ? Colors.green.shade400 : Colors.black45;
+      }
+    }
+    return Colors.black45;
+  }
+
+  void _handleOptionTap(int index, bool isCorrectOption) {
+    setState(() {
+      selectedIndex = index; // Update selected index
+      isAnswered = true; // Mark the question as answered
+      isCorrect = isCorrectOption; // Check if selected option is correct
+      if (isCorrect) {
+        log("Correct Answer");
+        score++;
+      } else {
+        log("Incorrect Answer");
+      }
+    });
+  }
+
+  IconData _getIconData(bool isSelected, bool isCorrectOption) {
+    if (isAnswered) {
+      if (isSelected) {
+        return isCorrect ? Icons.check_circle : Icons.cancel;
+      } else {
+        return isCorrectOption ? Icons.check_circle : Icons.circle;
+      }
+    }
+    return Icons.circle_outlined;
+  }
+
+  Color _getIconDataColor(bool isSelected, bool isCorrectOption) {
+    if (isAnswered) {
+      if (isSelected) {
+        return isCorrect ? Colors.green.shade900 : Colors.red.shade900;
+      } else {
+        return isCorrectOption ? Colors.green.shade900 : Colors.transparent;
+      }
+    }
+    return Colors.transparent;
   }
 }
